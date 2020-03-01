@@ -1,0 +1,77 @@
+Prerequisits:
+=============
+
+pgadmin4-1.4-py2.py3-none-any.whl
+
+on pgadmin create - hycuser/hycpass/hycdb/hyc_tenants (tblspace)
+1) role (hycuser),
+2) tablespace (see below),
+3) database (hycdb) and assigned tablespace (hyc_tenants),
+4) schema (public) by default
+5) schema (per tenant) by program
+
+make sure postgis is installed and extensions are activated:
+See Readme_Deep.doc
+
+See ~/.bash_profile for LD_LIBRARY_PATH
+to activate do: source ~/.bash_profile and maybe sudo ldconfig??
+
+
+To create a table space - had to make hyuser a superuser
+administrator@Hamrick:~/DJANGO$ mkdir dtablesplace
+administrator@Hamrick:~/DJANGO$ sudo chown postgres:postgres dtablesplace
+administrator@Hamrick:~/DJANGO$ psql -U hyuser -d hycdb -h 127.0.0.1 -W
+ddatabase=# create tablespace tenant_default owner hycuser location '/home/administrator/DJANGO/dtablespace'; or pgadmin
+
+manual install of latest version of tenant_schema from:
+https://django-tenant-schemas.readthedocs.io/en/latest/install.html#basic-settings
+
+multiple tenants :
+A vital feature for every Software-as-a-Service website
+Because we don’t want you running many copies of your project,
+you’ll be able to have:
+Multiple customers running on the same instance
+Shared and Tenant-Specific data
+Tenant View-Routing
+
+Why schemas?
+There are typically three solutions for solving the multitenancy problem.
+Isolated Approach: Separate Databases. Each tenant has it’s own database.
+Semi Isolated Approach: Shared Database, Separate Schemas. One database for all tenants, but one schema per tenant.
+Shared Approach: Shared Database, Shared Schema. All tenants share the same database and schema.
+    There is a main tenant-table, where all other tables have a foreign key pointing to.
+How it works
+Tenants are identified via their host name (i.e tenant.domain.com).
+This information is stored on a table on the public schema.
+Whenever a request is made, the host name is used to match a tenant in the database.
+If there’s a match, the search path is updated to use this tenant’s schema.
+So from now on all queries will take place at the tenant’s schema. For example, suppose
+you have a tenant customer at http://customer.example.com. Any request incoming at
+customer.example.com will automatically use customer‘s schema and make the tenant available at the request.
+If no tenant is found, a 404 error is raised. This also means you should have a tenant for your main domain,
+typically using the public schema.
+if you’d like a different tenant selection technique (e.g. using an HTTP Header), you can define a custom middleware. See Advanced Usage.
+
+Installation:
+=============
+mkdir DJANGO
+cd DJANGO
+virtualenv -p python3.4 venv
+source venv/bin/activate
+make sure : pip install django-tenant-schemas & ordereddict & orderedset in hycenv
+pip install -r requirements.txt
+
+hycuser/hycpass/hycdb/tenant_default (tblspace) - pgadmin
+
+django-admin.py startproject hycdash
+configure settings.py - for multi-tenant do:
+1) DATABASE_ENGINE 2) DATABASE_ROUTERS 3) MIDDLEWARE_CLASSES (at top)
+4) SHARED_APPS, 5) TENANT_APPS, 6)TENANT_MODEL, 7) INSTALLED_APP +=
+8) ORIGINAL_BACKEND (postgis), 9) DEFAULT_TABLESPACE
+
+The Tenant Model: python manage.py startapp customers (removed extra dirs)
+
+Create migration for model: python manage.py makemigrations customers
+
+Create shared app on public schema: python manage.py migrate_schemas --shared  (postgis extensions must exists)
+
