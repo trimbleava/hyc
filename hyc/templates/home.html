@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Home - {{ block.super }}{% endblock %}
+{% load static %}
+
+<!--{% load i18n %}
+{% block body-attrs %} class="standalone"{% endblock body-attrs %}
+{% block page-title %}{% trans 'Home' %}{% endblock %}-->
+
+{% block content %}
+    <div class="container-fluid">
+        <p>This is <mark>Home</mark> page with home highlited</p></div>
+        <p class="lead">This is Home page standout with adding .lead</p>
+    </div>
+{% endblock %}

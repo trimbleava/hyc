@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}About - {{ block.super }}{% endblock %}
+{% load static %}
+
+{% block content %}
+    <section class="container-fluid about-section">
+        <div class = "row text-left">
+            <div class="col-xs-4 col-sm-4">
+                <img class="img-responsive about-img-wrapper" src="{% static 'images/hamrick.png' %}" alt="Founding Father" />
+               <!-- <img class="img-responsive about-img-wrapper" src="{% static 'images/ptrimble.png' %}" alt="Founding Father" />
+                <img class="img-responsive about-img-wrapper" src="{% static 'images/avator.png' %}" alt="Founding Father" />-->
+            </div>
+            <div class="col-xs-8 col-sm-8">
+                <h1 class="about-hdr-wrapper">Robert Leon Hamrick <br>
+                <small>Visionary & Founder</small>
+                </h1>
+            </div>
+        </div>
+        <div class="about-txt-wrapper text-justify"><p>
+            Bob was born January 23rd 1929 near Indiantown. As a young man, he worked on the family ranch as a young cattle man.
+            From his earliest age, Bob had an immense curiosity about history, science, and technology and loved to read.
+            When his family sold their ranch in the 1950s, Bob elected to study engineering at the University of Florida.
+            Once he completed his Bachelor of Science in 1959, he took a position at the Central and Southern Florida Flood Control District,
+            predecessor of the South Florida Water Management District (District), as a Water Resource Engineer. He worked closely with
+            William V. Storch, the Director of Engineering at the District. Bob’s passion for the advancement of science and technology earned
+            him the responsibility of assuring that the District was continually considering and applying cutting edge science and technology
+            for water resources planning and engineering. By the mid- 1970s the District was considered among the most advanced regional water
+            management agencies in the nation and was frequently hosting international academic and operational engineers and scientists.
+            <br>
+            Among Bob’s past accomplishments for the District include: 1) Advancement of computer technology within the District including
+            the first main frame system for business and science applications, introduction of the word processor to the District, the introduction
+            of the HP 1000 minicomputer to the District for capturing and processing the high resolution surface-groundwater electrical analog
+            model output and the HP 3000 which was designed to be the first minicomputer delivered with a full featured operating system with
+            time-sharing between terminals for the District Hydrological Modeling Division, and the District scientific work station network which
+            were being utilized by scientist and engineers throughout the District. 2) Advancement of hydrologic measurements such as
+            remote sensing and NEXRAD. 3) Advancements of hydrologic model development and implementation. This included the electrical analog model
+            referenced above and the implementation of hydrologic modeling and optimization programs for regional water management.
+            And 4) Introduction of interannual to multidecadal climate variability for regional hydrologic planning operations.
+            <br>
+            Bob inspired the application of artificial neural networks (ANN) for climate pattern recognition and seasonal hydro-climatological
+            predictions for the District. This application of ANN led to the implementation of climate based hydrologic outlooks into the
+            Lake Okeechobee operational decision tree. Over the past few years AI has exploded, and especially since 2015. Much of that has to do
+            with the wide availability of Graphical Processing Units(GPUs) that make parallel processing ever faster, cheaper, and more powerful.
+            It also has to do with the simultaneous one-two punch of practically infinite storage and a flood of data of every stripe
+            (that whole Big Data movement) – images, text, transactions, mapping data, together with atmospheric reanalysis.
+            <br>
+            The Hydro-Climate Diagnostic and Prediction Center inspired by Bob’s visionary insights plan to apply the cutting edge deep learning
+            technology to make temporally and spatially refined climate based hydrologic outlooks
+            <br><br>
+            <strong>Publications</strong>
+            <br>
+            <ul>
+            <li>Hamrick, R.L., 1982, Long Term Tropical Storm Incidence, SFWMD, Memorandum, 1982</li>
+            <li>Lindahl, L.E. and R.L. Hamrick, 1970, The Potential and Practicality of Watershed Models in Operational Water Management, Jan. 26-30, 1970 ASCE  National Water Resources Engineering Meeting, Memphis Tennessee</li>
+            <li>Khanal, N.N. and R.L. Hamrick, 1971, A Stochastic Model for Daily Rainfall Data Synthesis, Symposium of Statistical Hydrology, Tucson Arizona, Aug.-Sept.2, 1971</li>
+            <li>Khanal, N.N. and R.L. Hamrick, 1971, An Approach To Optimization of an Existing Large Complex Drainage System, ASCE Irrigation and Drainage Division Specialty Conference Lincoln Nebraska</li>
+            <li>Shahane, A.N., D. Paich and R.L. Hamrick, 1977, A Framework of the Water Quality Planning Model for the Conservation Areas of the Florida Everglades, SFWMD, 1977 AN</li>
+            <li>Shahane, A.N., P Berger, RL Hamrick, 1977, The Development of the Operational Water Quantity Mode</li>
+            <li>Storch, W.V. and R.L. Hamrick.1970, "An Approach to Operation of a Regional Primary Water Central System," Social and Ecological Aspects of Irrigation and Drainage, American Society of Civil Engineers, New York, N.Y., 1970, pp. 45-62.</li>
+            <li>Sun-Fu Shih and R.L. Hamrick, 1974 A, Technique Used to Determine Random Point Position, Water Resources Bulletin 10(5), 884,898</li>
+            <li>Sun-Fu Shih and R.L. Hamrick, 1975 A modified Monte Carlo technique to compute Thiessen coefficients, Journal of Hydrology Vol. 27, Issues 3–4, December 1975, Pages 339-35</li>
+            </ul>
+            </p></div>
+    </section>
+{% endblock %}

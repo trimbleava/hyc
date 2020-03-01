@@ -1,0 +1,142 @@
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+  font-family: sans-serif;
+}
+
+/* override for the margins */
+.container-fluid {padding:0; margin:0}
+
+/*.row {padding:0; margin:0} not needed */
+
+.row.no-margin { margin:0}
+
+.row.no-margin [class*='col-']:first-child {padding-left:0;}
+
+.row.no-margin [class*='col-']:last-child {padding-right:0;}
+
+
+/* Wrapper for page content to push down footer */
+#header {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -40px;
+  /* Pad bottom by footer height */
+  padding: 0 0 40px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 40px;
+  background:#FFE87C;
+  overflow: auto;
+}
+
+.footer-buffer { margin-top: .6em; margin-bottom: .6em; margin-right: 1.5em; margin-left: 1.5em;}
+
+
+/* for header that includes the banner, logo and navbar */
+.banner-image {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.logo-image {
+    left: 5%;
+    top: 18%;
+    position: absolute;
+
+}
+
+.navbar-custom {
+    right: 5%;
+    top: 18%;
+    position: absolute;
+    background:transparent;
+    border:none;
+    font-size: 1.2em
+}
+
+
+.navbar-default .navbar-nav > li > a {
+  color: #000;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
+
+.navbar-default .navbar-toggle:focus {
+     background-color: #FFE87C;
+ }
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #ffffcc;
+}
+
+.about-section {
+  color: #ffffff;
+  background-color: #23374c;
+}
+
+.contact-section {margin: 50px 200px 1px 200px; color: #000000; background-color:#ffffff; font-size: 16px;}
+#hyc-loc-map, #hyc-loc-map1  { height: 400px; width: 100%; border: 1px solid #AAA;}
+
+
+/* margin - space outside border shorthand top,right,bottom,left - clockwise */
+/* padding - space inside border shorthand top,right,bottom,left - clockwise */
+.about-img-wrapper { padding: 50px 1px 1px 200px; margin: 1px 1px 15px 1px; width: 60%;}
+.about-hdr-wrapper { padding: 50px 1px 1px 5px; margin: 1px 1px 15px 1px; font-size: 3.0em;}
+.about-txt-wrapper > p { padding: 1px 200px 1px 200px; margin: 1px 1px 15px 1px; font-size:16px;}
+.about-txt-wrapper > ul { padding: 1px 200px 1px 210px; margin: 1px 1px 15px 1px;font-size:16px;}
+
+/* xs */
+@media screen and (max-width: 767px) {
+    #footer {font-size: 0.675em;}
+    .navbar-custom {font-size: 0.675em}
+    .about-img-wrapper { padding: 10px 1px 1px 20px; margin: 1px 1px 15px 1px; width: 100%;}
+    .about-hdr-wrapper { padding: 10px 1px 1px 1px; margin: 1px 1px 15px 1px; font-size:18px;}
+    .about-txt-wrapper > p { padding: 1px 10px 1px 10px; margin: 1px 1px 15px 1px; font-size:14px;}
+    .about-txt-wrapper > ul { padding: 1px 10px 1px 25px; margin: 1px 1px 15px 1px; font-size:12px;}
+
+}
+
+/* sm */
+@media screen and (min-width: 768px) {
+    #footer {font-size: 0.875em;}
+    .navbar-custom {font-size: 0.875em; }
+    .about-img-wrapper { padding: 10px 1px 1px 20px; margin: 1px 1px 15px 1px; width: 100%;}
+    .about-hdr-wrapper { padding: 10px 1px 1px 1px; margin: 1px 1px 15px 1px; font-size:18px;}
+    .about-txt-wrapper > p { padding: 1px 10px 1px 10px; margin: 1px 1px 15px 1px; font-size:14px;}
+    .about-txt-wrapper > ul { padding: 1px 10px 1px 25px; margin: 1px 1px 15px 1px; font-size:12px;}
+}
+
+/* md */
+@media screen and (min-width: 992px) {
+    #footer {font-size: 1.1em;}
+    .navbar-custom {font-size: 1.2em}
+    .about-img-wrapper { padding: 50px 1px 1px 200px; margin: 1px 1px 15px 1px; width: 60%;}
+    .about-hdr-wrapper { padding: 50px 1px 1px 5px; margin: 1px 1px 15px 1px; font-size: 20px;}
+    .about-txt-wrapper > p { padding: 1px 200px 1px 200px; margin: 1px 1px 15px 1px; font-size:16px;}
+    .about-txt-wrapper > ul { padding: 1px 200px 1px 210px; margin: 1px 1px 15px 1px; font-size:16px;}
+}
+
+/* lg */
+@media screen and (min-width: 1200px) {
+    #footer {font-size: 1.1em;}
+    .navbar-custom {font-size: 1.2em;}
+    .about-img-wrapper { padding: 50px 1px 1px 200px; margin: 1px 1px 15px 1px; width: 60%;}
+    .about-hdr-wrapper { padding: 50px 1px 1px 5px; margin: 1px 1px 15px 1px;font-size: 3.0em;}
+    .about-txt-wrapper > p { padding: 1px 200px 1px 200px; font-size:16px; margin: 1px 1px 15px 1px;}
+    .about-txt-wrapper > ul { padding: 1px 200px 1px 210px; font-size:16px; margin: 1px 1px 15px 1px;}
+}
+

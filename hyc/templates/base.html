@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+    <!-- leaflet@1.1.0 -->
+    <link rel="stylesheet" type="text/css" href="http://cdn.leafletjs.com/leaflet/v1.1.0/leaflet.css" />
+
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet" type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type='text/css'>
+
+    <!-- Add custom CSS in static file -->
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+    <script type='text/javascript' src='http://cdn.leafletjs.com/leaflet/v1.1.0/leaflet.js'></script>
+
+    <title>{% block title %} Hydroclimate {% endblock %}</title>
+  </head>
+
+  <body>
+
+  <div id='header'>
+    {% block header %}
+
+      {% load static %}
+      {% load template_tags %}
+
+      <div class="container-fluid">
+        <div class = "row no-margin text-left">
+            <div class="col-xs-12 col-sm-12" style="background-color:none">
+                <img class="img-responsive banner-image" src="{% static 'images/logo_banner.png' %}" alt="banner" />
+                <img class="img-responsive hidden-xs hidden-sm logo-image" src="{% static 'images/logo-white.png' %}" alt="Hydroclimate" />
+
+                <nav class="navbar navbar-default navbar-custom">
+                    <div class="container-fluid">
+                        <!-- Brand and toggle get grouped for better mobile display -->
+                        <div class="navbar-header">
+                          <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                  data-target="#collapseNavItems" aria-expanded="false">
+                            <!--Screen readers will have trouble with your forms if you don't include a label for every input.
+                                For these inline forms, you can hide the labels using the .sr-only class.-->
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                          </button>
+
+                        </div> <!-- end header -->
+                        <!--<a class="navbar-brand visible-xs" href="#">Hydroclimate</a>-->
+
+                        <!-- Collect the nav links, forms, and other content for toggling -->
+                        <div class="collapse navbar-collapse" id="collapseNavItems">
+                            <!--<ul class="nav navbar-nav visible-xs">-->
+                                <!--<li><a class="navbar-brand" href="#">Hydroclimate</a></li>-->
+                            <!--</ul>-->
+
+                            <ul class="nav navbar-nav">
+                              <li class="{% navactive request 'home_url_name' %}"><a href="{% url 'home_url_name' %}"><span class="glyphicon glyphicon-home"></span></a></li>
+                              <li class="{% navactive request 'services_url_name' %}"><a href="{% url 'services_url_name' %}"><b>Services</b></a></li>
+                              <li class="{% navactive request 'about_url_name' %}"><a href="{% url 'about_url_name' %}"><b>About</b></a></li>
+                              <li class="{% navactive request 'contact_url_name' %}"><a href="{% url 'contact_url_name' %}"><b>Contact</b></a></li>
+                            </ul>
+                            <!--<ul class="nav navbar-nav navbar-right">
+                              <li><a href="#"><span class="glyphicon glyphicon-user"></span>My Project</a></li>
+                            </ul>-->
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+      </div>
+    {% endblock %}
+
+    <div id="summary">
+        {% block summary %}{% endblock %}
+    </div>
+
+    <div id="instructions">
+        {% block instructions %}{% endblock %}
+    </div>
+
+    <div id="content" >
+        {% block content %}{% endblock %}
+    </div>
+  </div>  <!-- end of header which is like a wrap -->
+
+
+  <div id="footer" class="container-fluid">
+    <div class="row footer-buffer">
+        <div class="col-xs-6 col-sm-6"><span><b>&copy;2016 Hydroclimate Diagnostics & Prediction Center Inc.</b></span></div>
+        <div class="col-xs-6 col-sm-6"><span class="pull-right"><b>Email: Contact@Hydroclimate.us</b></span></div>
+        <!--<div class="pull-right col-lg-4 col-lg-offset-4 col-xs-12" style="font-size:14px">-->
+            <!--&lt;!&ndash; https://www.w3schools.com/icons/bootstrap_icons_glyphicons.asp &ndash;&gt;-->
+            <!--<a href="#"><i class="glyphicon glyphicon-linkedin"></i>ffffff</a>-->
+            <!--<a href="#"><i class="fa fa-linkedin-square fa-icon"></i></a>-->
+            <!--<a href="#"><i class="fa fa-twitter-square fa-icon"></i></a>-->
+            <!--<a href="#"><i class="fa fa-skype fa-icon"></i></a>-->
+            <!--<a href="#"><i class="fa fa-facebook-square fa-icon"></i></a>-->
+            <!--<a href="#"><i class="fa fa-github-square fa-icon"></i></a>-->
+        <!--</div>-->
+    </div>
+  </div>
+
+<!--<div id="footer">
+  <p style="float: left;">Current Tenant:
+      {% if request.tenant %}
+      <a href="http://{{ request.tenant.domain_url }}:8000">{{ request.tenant.name }}</a>
+      (<code>{{ request.tenant.schema_name }}</code>, <code>{{ request.tenant.domain_url }}</code>).
+
+      Available Tenants:
+      {% else %}
+      None.
+      {% endif %}
+  {% for tenant in tenants_list %}
+      <a href="http://{{ tenant.domain_url }}:8000">{{ tenant.name }}</a> &middot;
+  {% endfor %}</p>
+  <p style="float: right;">
+    <a href="https://github.com/bernardopires/django-tenant-schemas">django-tenant-schemas</a> &middot; <a href="https://django-tenant-schemas.readthedocs.io/en/latest/">Documentation</a>
+  </p>
+</div>-->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- activate navigation tabs using script - not used -->
+    <!--<script src="{% static 'js/header.js' %}"></script>-->
+
+  </body>
+</html>

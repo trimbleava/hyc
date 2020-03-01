@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Success - {{ block.super }}{% endblock %}
+{% load static %}
+
+{% block content %}
+<section class="container-fluid contact-section">
+    <h1><a href="{% url 'success_url_name' %}">Success! Email sent.</a></h1>
+</section>
+{% endblock %}

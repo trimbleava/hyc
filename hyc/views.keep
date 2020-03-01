@@ -1,0 +1,149 @@
+from customers.models import Client
+from django.conf import settings
+from django.db import utils
+from django.views.generic import TemplateView
+from django.views.generic.edit import FormView
+
+from tenant_schemas.utils import remove_www
+
+from hycdash.application.hycdash.forms import ContactForm
+from django.shortcuts import render
+from django.http import HttpResponse
+
+
+# Create your views here.
+
+def testview(request):
+    return HttpResponse("Hello, world. You're testing Hydroclimate 'testview'.")
+
+# view is a callable which takes a request and returns a response
+# TemplateView extends the base class to make it also render a template
+
+# Class-based views provide an alternative way to implement views as Python objects instead of functions.
+# They do not replace function-based views, but have certain differences and advantages when compared to function-based views:
+# 1) Organization of code related to specific HTTP methods (GET, POST, etc.) can be addressed by separate methods instead of conditional branching.
+# 2) Object oriented techniques such as mixins (multiple inheritance) can be used to factor code into reusable components
+# TemplateView - Renders a given template, with the context containing parameters captured in the URL.
+# class AboutView(TemplateView):
+#     template_name = "about.html"
+
+
+class HomeView(TemplateView):
+    template_name =  "home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(HomeView, self).get_context_data(**kwargs)
+        hostname_without_port = remove_www(self.request.get_host().split(':')[0])
+
+        try:
+            Client.objects.get(schema_name='public')
+        except utils.DatabaseError:
+            context['need_sync'] = True
+            context['shared_apps'] = settings.SHARED_APPS
+            context['tenants_list'] = []
+            return context
+        except Client.DoesNotExist:
+            context['no_public_tenant'] = True
+            context['hostname'] = hostname_without_port
+
+            # create public client
+            Client(domain_url=settings.HOST_NAME,        #'127.0.0.1',
+                   schema_name=settings.PUBLIC_SCHEMA,   # 'public',
+                   name=settings.DEFAULT_APP,            #'Hydroclimate',
+                   description='Public Tenant').save()
+
+        if Client.objects.count() == 1:
+            context['only_public_tenant'] = True
+
+        context['tenants_list'] = Client.objects.all()
+        return context
+
+
+class AboutView(TemplateView):
+    template_name =  "about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutView, self).get_context_data(**kwargs)
+        hostname_without_port = remove_www(self.request.get_host().split(':')[0])
+
+        try:
+            Client.objects.get(schema_name='public')
+        except utils.DatabaseError:
+            context['need_sync'] = True
+            context['shared_apps'] = settings.SHARED_APPS
+            context['tenants_list'] = []
+            return context
+        except Client.DoesNotExist:
+            context['no_public_tenant'] = True
+            context['hostname'] = hostname_without_port
+
+            # create public client
+            Client(domain_url=settings.HOST_NAME,        #'127.0.0.1',
+                   schema_name=settings.PUBLIC_SCHEMA,   # 'public',
+                   name=settings.DEFAULT_APP,            #'Hydroclimate',
+                   description='Public Tenant').save()
+
+        if Client.objects.count() == 1:
+            context['only_public_tenant'] = True
+
+        context['tenants_list'] = Client.objects.all()
+        return context
+
+
+class ServicesView(TemplateView):
+    template_name =  "services.html"
+
+
+class ContactView(FormView):
+
+    template_name =  "contact.html"
+    form_class = ContactForm
+    success_url = '/success'
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.send_email()
+        return super(ContactView, self).form_valid(form)
+
+
+
+class SuccessView(TemplateView):
+    template_name = "success.html"
+
+
+
+# from django.http import HttpResponse
+# from django.views import View
+#
+# class MyView(View):
+#     def get(self, request):
+#         # <view logic>
+#         return HttpResponse('result')
+# # urls.py
+# from django.conf.urls import url
+# from myapp.views import MyView
+#
+# urlpatterns = [
+#     url(r'^about/$', MyView.as_view()),
+# ]
+#
+# from django.http import HttpResponse
+# from django.views import View
+#
+# class GreetingView(View):
+#     greeting = "Good Day"
+#
+#     def get(self, request):
+#         return HttpResponse(self.greeting)
+#
+# # You can override that in a subclass:
+# class MorningGreetingView(GreetingView):
+#     greeting = "Morning to ya"
+#
+# # Another option is to configure class attributes as keyword arguments to the as_view() call in the URLconf:
+# urlpatterns = [
+#     url(r'^about/$', GreetingView.as_view(greeting="G'day")),
+# ]
+#
+# TemplateView = TemplateResponseMixin(i.e. render_to_response(), ...) + View()
