@@ -1,3 +1,21 @@
+#!/bin/bash
+
+# Usage: ./deploy.sh <apache_local|apache_gce_cloud>
+#
+
+echo "Entered $0 ********************"
+echo
+
+#
+# read command line -- set deployment environment
+#
+DEPLOY_ENV=$1
+
+#if [ $DEPLOY_ENV=='LOCAL' ]; then
+#elif [ $DEPLOY_ENV=='cloud']; then
+#fi
+ 
+bash    
 # create the project
 django-admin startproject HYC
 mv HYC to Hydroclimate  - only for more distinction
@@ -10,6 +28,7 @@ HYC/settings
 Hydroclimate/manage.py
 	--> os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HYC.settings')
 """
+virtualenv -p python3.6 visualEnv
 
 # test the project setup
 python manage.py runserver 0:8000

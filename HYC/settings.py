@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-DB_HOST = '172.20.0.2'             #'db_server'   # container name, see docker-compose.yaml
+DB_HOST = '172.0.0.1'             #'db_server'   # container name, see docker-compose.yaml
 HOST_NAME = '127.0.0.1'
 PUBLIC_SCHEMA = 'public',
 DEFAULT_APP = 'hyc',
